@@ -63,12 +63,6 @@ try {
     $db = new CentreonDB("centstorage");
     $pearDB = $db_centreon;
 
-    if ($centreon->user->admin == 0) {
-        $access = new CentreonACL($centreon->user->get_id());
-        $grouplist = $access->getAccessGroups();
-        $grouplistStr = $access->getAccessGroupsString();
-    }
-
     $widgetObj = new CentreonWidget($centreon, $db_centreon);
     $preferences = $widgetObj->getWidgetPreferences($widgetId);
     $autoRefresh = 0;
@@ -78,13 +72,6 @@ try {
 } catch (Exception $e) {
     echo $e->getMessage() . "<br/>";
     exit;
-}
-
-//ACL
-if ($centreon->user->admin == 0) {
-  $access = new CentreonACL($centreon->user->get_id());
-  $grouplist = $access->getAccessGroups();
-  $grouplistStr = $access->getAccessGroupsString();
 }
 
 //configure smarty
